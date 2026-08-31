@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>캐릭터 카드 에디터</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 깃허브에 올려둔 신라문화체 외부 웹폰트 연결 */
+        @font-face {
+            font-family: 'ShillaCultureB';
+            src: url('https://longlong0000.github.io/BS/Shilla_Culture(B).ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        #cardCanvas {
+            width: 1200px; height: 500px;
+            position: relative; overflow: hidden;
+            background-color: #000000;
+            background-image: url('https://longlong0000.github.io/BS/2.png'); 
+            background-size: cover; 
+            background-position: center;
+            border: none;
+        }
+        #charPreview {
+            position: absolute;
+            left: 0; top: 0;
+            z-index: 10;
+        }
+        /* 이름란에 신라문화체 적용 및 단단한 그림자 효과 (#472753 적용) */
+        #displayName {
+            font-family: 'ShillaCultureB', 'Batang', '바탕', serif;
+            color: #ffffff;
+            text-shadow: 
+                4px 4px 0px #472753,
+                5px 5px 0px #472753,
+                6px 6px 0px #472753;
+        }
+    </style>
+</head>
+<body class="p-10 bg-gray-900">
+    <div class="max-w-6xl mx-auto flex flex-col items-center gap-8">
+        
+        <!-- 카드 프리뷰 -->
+        <div id="cardCanvas" class="shadow-2xl">
+            <img id="charPreview" src="" style="width: 300px; transform: translate(0px, 0px);">
+            
+            <!-- 이름 영역 -->
+            <div style="position: absolute; left: 40px; top: 60px; z-index: 20;">
+                <h1 id="displayName" class="text-6xl font-black italic">이름</h1>
+            </div>
+
+            <!-- 캐릭터 상세 정보 표시 영역 (높이를 살짝 더 위로 올림: top: 145px) -->
+            <div style="position: absolute; left: 45px; top: 145px; z-index: 20; color: white; font-size: 1.25rem; font-weight: bold; font-family: 'Batang', '바탕', serif; display: flex; flex-direction: column; gap: 8px;">
+                <div>
+                    <span id="displayTao">-</span>
+                </div>
+                <div>
+                    <span id="displayField">-</span>
+                </div>
+                <div>
+                    <span id="displayAge">-</span>세 / <span id="displayHeight">-</span>cm / <span id="displayGender">-</span>
+                </div>
+                <div>
+                    소속문파 / 세력 : <span id="displaySect">-</span> / <span id="displayFaction">-</span>
+                </div>
+                <div>
+                    수련 경지: <span id="displayRealm">-</span>
+                </div>
+                <div>
+                    주력무공 / 법보 : <span id="displayArt">-</span> / <span id="displayArtifact">-</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 설정창 -->
+        <div class="w-[1200px] bg-white p-8 rounded-lg grid grid-cols-4 gap-6">
+            <div class="col-span-2 grid grid-cols-2 gap-4">
+                <input type="text" id="nameInput" placeholder="이름" class="p-3 border w-full">
+                <input type="text" id="taoInput" placeholder="도호" class="p-3 border w-full">
+                <input type="text" id="fieldInput" placeholder="수련 분야" class="p-3 border w-full">
+                <input type="text" id="realmInput" placeholder="수련 경지" class="p-3 border w-full">
+                <input type="text" id="ageInput" placeholder="나이" class="p-3 border w-full">
+                <input type="text" id="heightInput" placeholder="키 (cm)" class="p-3 border w-full">
+                <input type="text" id="genderInput" placeholder="성별" class="p-3 border w-full">
+                <input type="text" id="sectInput" placeholder="소속문파" class="p-3 border w-full">
+                <input type="text" id="factionInput" placeholder="세력" class="p-3 border w-full">
+                <input type="text" id="artInput" placeholder="주력무공" class="p-3 border w-full">
+                <input type="text" id="artifactInput" placeholder="법보" class="p-3 border w-full">
+                <input type="file" id="charInput" class="col-span-2 p-2 border w-full">
+            </div>
+            
+            <div class="col-span-2 grid grid-cols-1 gap-2 content-start">
+                <label>가로 위치: <input type="range" id="xRange" min="-500" max="1200" value="0" class="w-full"></label>
+                <label>세로 위치: <input type="range" id="yRange" min="-500" max="1000" value="0" class="w-full"></label>
+                <label>크기 조절: <input type="range" id="sizeRange" min="50" max="1000" value="300" class="w-full"></label>
+            </div>
+
+            <div class="col-span-4 flex justify-center">
+                <button onclick="downloadCard()" class="bg-black text-white px-10 py-3 font-bold w-full rounded">이미지 저장하기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const charImg = document.getElementById('charPreview');
+
+        document.getElementById('xRange').addEventListener('input', () => updateTransform());
+        document.getElementById('yRange').addEventListener('input', () => updateTransform());
+        document.getElementById('sizeRange').addEventListener('input', (e) => charImg.style.width = e.target.value + 'px');
+
+        function updateTransform() {
+            const x = document.getElementById('xRange').value;
+            const y = document.getElementById('yRange').value;
+            charImg.style.transform = `translate(${x}px, ${y}px)`;
+        }
+
+        // 입력값 실시간 연동
+        document.getElementById('nameInput').addEventListener('input', (e) => document.getElementById('displayName').innerText = e.target.value || '이름');
+        document.getElementById('taoInput').addEventListener('input', (e) => document.getElementById('displayTao').innerText = e.target.value || '-');
+        document.getElementById('fieldInput').addEventListener('input', (e) => document.getElementById('displayField').innerText = e.target.value || '-');
+        document.getElementById('ageInput').addEventListener('input', (e) => document.getElementById('displayAge').innerText = e.target.value || '-');
+        document.getElementById('heightInput').addEventListener('input', (e) => document.getElementById('displayHeight').innerText = e.target.value || '-');
+        document.getElementById('genderInput').addEventListener('input', (e) => document.getElementById('displayGender').innerText = e.target.value || '-');
+        document.getElementById('sectInput').addEventListener('input', (e) => document.getElementById('displaySect').innerText = e.target.value || '-');
+        document.getElementById('factionInput').addEventListener('input', (e) => document.getElementById('displayFaction').innerText = e.target.value || '-');
+        document.getElementById('realmInput').addEventListener('input', (e) => document.getElementById('displayRealm').innerText = e.target.value || '-');
+        document.getElementById('artInput').addEventListener('input', (e) => document.getElementById('displayArt').innerText = e.target.value || '-');
+        document.getElementById('artifactInput').addEventListener('input', (e) => document.getElementById('displayArtifact').innerText = e.target.value || '-');
+        
+        document.getElementById('charInput').addEventListener('change', (e) => {
+            const reader = new FileReader();
+            reader.onload = (event) => charImg.src = event.target.result;
+            reader.readAsDataURL(e.target.files[0]);
+        });
+
+        function downloadCard() {
+            html2canvas(document.getElementById('cardCanvas'), { 
+                useCORS: true, 
+                allowTaint: true 
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'my-character-card.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
