@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>동양풍 세계관 아카이브</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'DungGeunMo';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+            font-weight: normal; font-style: normal; font-display: swap;
+        }
+        
+        *, *::before, *::after { box-sizing: border-box; }
+        
+        /* 동양풍 베이지색 배경 테마 적용 */
+        .custom-wrapper {
+            display: block !important;
+            width: 100% !important;
+            min-height: 100vh !important;
+            background-color: #f7f3eb !important;
+            background-image: linear-gradient(90deg, rgba(217, 204, 166, 0.15) 1px, transparent 1px),
+                              linear-gradient(0deg, rgba(217, 204, 166, 0.15) 1px, transparent 1px) !important;
+            background-size: 40px 40px !important;
+            padding: 40px 0 !important;
+            margin: 0 !important;
+            font-family: 'Nanum Myeongjo', serif !important;
+            color: #2c241d !important;
+            line-height: 1.8 !important;
+        }
+        .custom-container { max-width: 800px !important; margin: 0 auto !important; padding: 0 20px !important; }
+        
+        .custom-main-title { 
+            text-align: center !important; 
+            font-size: 38px !important; 
+            font-weight: bold !important; 
+            font-family: 'Nanum Myeongjo', serif !important; 
+            color: #704214 !important; 
+            margin-bottom: 40px !important; 
+            border-bottom: 2px solid #d9cca6 !important; 
+            padding-bottom: 15px !important; 
+            letter-spacing: 2px !important;
+        }
+        
+        .faction-header { font-size: 22px !important; font-weight: bold !important; font-family: 'Nanum Myeongjo', serif !important; color: #704214 !important; margin: 40px 0 20px 0 !important; border-bottom: 2px dashed #d9cca6 !important; padding-bottom: 8px !important; }
+
+        .custom-box { display: block !important; background: #fffdf9 !important; border: 1px solid #d9cca6 !important; border-radius: 12px !important; padding: 30px !important; margin-bottom: 30px !important; box-shadow: 0 4px 15px rgba(44, 36, 29, 0.03) !important; color: #2c241d !important; }
+        .custom-box-title { font-size: 20px !important; font-weight: bold !important; color: #704214 !important; margin-bottom: 20px !important; border-left: 4px solid #704214 !important; padding-left: 12px !important; font-family: 'Nanum Myeongjo', serif !important; }
+        
+        /* 캐릭터 및 지도 이미지 스타일 */
+        .custom-char-wrap {
+            display: block !important;
+            width: 100% !important;
+            margin-bottom: 20px !important;
+            text-align: center !important;
+            background: #fffdf9 !important;
+            border: 1px solid #d9cca6 !important;
+            box-shadow: 0 4px 15px rgba(44, 36, 29, 0.03) !important;
+            padding: 15px !important;
+            border-radius: 12px !important;
+        }
+        .custom-char-wrap img {
+            width: 100% !important;
+            height: auto !important;
+            object-fit: contain !important;
+            display: block !important;
+            border-radius: 8px !important;
+        }
+        
+        .custom-profile { display: flex !important; border-bottom: 1px solid #f0eae1 !important; padding: 8px 0 !important; font-family: 'Nanum Myeongjo', serif !important; font-size: 15px !important; align-items: center !important; }
+        .custom-label { width: 130px !important; color: #704214 !important; font-weight: bold !important; font-family: 'Nanum Myeongjo', serif !important; }
+        .custom-value { flex: 1 !important; color: #2c241d !important; font-family: 'Nanum Myeongjo', serif !important; }
+
+        .system-label { 
+            width: 130px !important; 
+            color: #704214 !important; 
+            font-weight: bold !important; 
+            font-family: 'Nanum Myeongjo', serif !important; 
+            font-size: 16px !important;
+        }
+
+        .custom-btn-link { 
+            display: inline-block !important;
+            background-color: #704214 !important; 
+            color: #f7f3eb !important; 
+            -webkit-text-fill-color: #f7f3eb !important; 
+            text-decoration: none !important; 
+            padding: 6px 12px !important; 
+            border-radius: 6px !important; 
+            font-weight: normal !important; 
+            font-size: 14px !important; 
+            font-family: 'Nanum Myeongjo', serif !important; 
+            text-align: center !important;
+            transition: background-color 0.2s !important; 
+        }
+        .custom-btn-link:hover { background-color: #53310e !important; }
+
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="custom-wrapper">
+        <div class="custom-container">
+            <div class="custom-main-title">浮生若夢</div>
+            
+            <div class="custom-box reveal-on-scroll">
+                <div class="custom-box-title">세계관</div>
+                <div>천지(天地)의 영기가 깃들고, 억겁(億劫)의 세월 속에서 장생(長生)과 천도(天道)의 경지를 좇는 아득한 수진계(修仙界).
+
+비록 칠흑 같은 마기(魔氣)와 잔혹한 천겁(天劫)이 도사리는 위태로운 곳이나, 이 거대한 세상이 늘 피비린내만 풍기는 것은 아니다.<br>
+<br>
+세속을 등지고 홀로 도(道)를 닦던 이들이 우연한 기연(奇緣)으로 얽히고설키며 빚어내는 저마다의 소동, 메마른 수행의 길목에 홀연히 피어나는 아득하고도 다정한 연모, 그리고 잔잔한 풍경을 흔드는 뜻밖의 인연.<br>
+<br>
+검을 품에 안고 창공을 가르다가도 찻잔을 기울이며 헛소리를 주고받고, 때로는 작은 오해 하나에 마음을 쓰기도 하는 곳. 엄숙한 명문 대파(大派)의 기개 뒤로 따스한 온기와 웃음이 떠나지 않는, 맑고도 정겨운 수선계(修仙界)의 풍경이다.</div>
+            </div>
+
+            <div class="custom-box reveal-on-scroll">
+                <div class="custom-box-title">지역</div>
+                
+                <div style="margin-bottom: 20px;">
+                    <img src="https://longlong0000.github.io/BS/map.png" alt="지역 지도" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid #d9cca6; display: block;">
+                </div>
+
+                <div>
+- 천기산맥 (天機山脈)<br>
+* 특징: 세상을 지탱하는 거대한 용맥(龍脈)이 지나가는 자리로, 세계에서 영기(靈氣)가 가장 진하게 뭉쳐 있는 성지입니다.<br>
+* 분위기: 구름 위에 떠 있는 듯한 부유섬들과 만년설이 쌓인 거봉들이 끝없이 이어져 있으며, 하늘과 맞닿아 있어 천도(天道)를 깨닫기 수월합니다.<br>
+* 주요 세력: 정통 선문(仙門) 중에서도 최고 명문인 대형 문파들과 검修(검을 다루는 수사)들이 모여 사는 검종들이 본거지를 두고 있습니다.<br>
+<br>
+- 만요해 (萬妖海)<br>
+* 특징: 끝을 가늠할 수 없는 광활하고 검푸른 바다로, 수많은 요수(妖獸)와 해족(海族)들이 세력을 형성하고 살아가는 미지의 영역입니다.<br>
+* 분위기: 시시때때로 거친 폭풍과 해일이 몰아치며, 바다 밑바닥에는 고대 상고 시대의 침몰한 유적과 진귀한 해저 영보(靈寶)들이 잠들어 있습니다.<br>
+* 주요 세력: 인간 수사들에게는 위험천만한 사지(死地)이지만, 고阶 요수들의 내단이나 진귀한 해저 약초를 구하려는 모험가들과 상단들이 끊이지 않습니다.<br>
+<br>
+- 구유마연 (九幽魔淵)<br>
+* 특징: 세상의 음기(陰氣)와 살기(殺氣)가 극에 달해 지하 깊은 곳으로 끝없이 꺼져 들어간 듯한 어두운 협곡입니다.<br>
+* 분위기: 하늘에는 핏빛 구름이 맴돌고, 대지에서는 검은 마기(魔氣)가 안개처럼 피어오릅니다. 일반 수사가 이곳에 발을 들였다가는 순식간에 정신을 잃고 주화입마(走火入魔)에 빠지기 쉽습니다.<br>
+* 주요 세력: 정마대전에서 패배하거나 숨어 지내는 마도(魔道) 세력, 귀修(귀신을 다루는 자), 그리고 잔인무도한 사파(邪派) 고수들의 은거지입니다.<br>
+<br>
+- 만리황사 (萬里黃沙)<br>
+* 특징: 과거 상고 시대 대전쟁의 여파로 대지가 파괴되고 영기가 메말라버린 끝없는 모래사막입니다.<br>
+* 분위기: 낮에는 타오르는 듯한 태양열과 모래바람이 불고, 밤에는 모든 것을 얼어붙게 하는 한기가 찾아옵니다. 척박한 환경이지만, 사막 깊은 곳에는 모래 속에 파묻힌 고대 문명의 유적과 이곳에서만 자생하는 특수한 화속성(火屬性) 영약들이 존재합니다.<br>
+<br>
+- 청허천 (淸虛天) - 비경(秘境)<br>
+* 특징: 세속과 완전히 격리된 채 독립된 공간으로 존재하는 은둔의 별천지입니다.<br>
+* 분위기: 바깥 세상과 시간이 다르게 흐르거나(시간 가속), 수련에 최적화된 극상의 영기가 소용돌이칩니다. 안개 속에 숨겨져 있어 평소에는 그 존재를 찾을 수 없고, 특정한 시기나 조건이 맞물릴 때만 입구가 열립니다.<br>
+* 주요 특징: 전설 속 고인거사(高人巨士)들의 유산이나 상고 시대의 상속(傳承)을 얻기 위해 수많은 천재 수사들이 목숨을 걸고 도전하는 곳입니다.<br>
+<br>
+- 영운곡 (靈雲谷)<br>
+* 특징: 사방이 거대한 산봉우리로 둘러싸여 안개가 자욱하게 피어오르는 비옥하고 아늑한 분지 지형입니다.<br>
+* 분위기: 땅 전체에 영천(靈泉)이 흐르고 있어 사계절 내내 꽃이 지지 않으며, 신선한 약초와 영과(靈果)가 자라나기에 최적의 환경을 갖추고 있습니다.<br>
+* 주요 세력: 직접 칼을 겨누고 싸우는 투쟁적인 문파보다는, 천재적인 단사(丹師, 약초를 다루는 자)들과 진법가들이 모여 거대한 상단이나 연맹을 이루고 평화롭게 은거하는 곳입니다.<br>
+<br>
+- 백골참 (白骨斬)<br>
+* 특징: 과거 신선과 마족이 벌인 대전쟁(신마대전)의 주 전장이었던 황량한 고원 지대로, 대지에 스며든 살기와 원혼이 수만 년 동안 흩어지지 않은 저주받은 땅입니다.<br>
+* 분위기: 대지 전체가 백골과 부서진 병장기로 뒤덮여 있으며, 밤이 되면 원혼들이 울부짖는 소리와 함께 귀화(鬼火)가 떠돌아다닙니다.<br>
+* 주요 세력: 시체나 영혼을 다루는 사령술사, 혹은 극한의 살기를 온몸으로 버텨내며 육신을 단련하는 체수(體修)들이 자신의 한계를 시험하기 위해 찾아오는 위험천만한 수련지입니다.<br>                </div>
+            </div>
+
+            <div class="custom-box reveal-on-scroll">
+                <div class="custom-box-title">천기산맥 3대 문파</div>
+                <div>- 성하검곡 (星河劍谷)<br>
+- 성격/특징: 우주의 섭리와 운행을 검끝으로 구현하는 신비롭고 고요한 분위기의 문파.<br>
+- 본산: 별빛과 달빛이 쏟아지는 깊은 협곡.<br>
+- 주력: 성하주천검 및 검진 (별자리 궤적 활용).<br>
+<br>
+- 능운검각 (凌雲劍閣)<br>
+- 성격/특징: 패기 있고 진취적인 기상, 극한의 환경에서 수련하는 호탕한 성향의 문파.<br>
+- 본산: 천기산맥 최고봉과 아득한 부유섬.<br>
+- 주력: 능운파천검 (구름을 가르는 폭발적인 위력).<br>
+<br>
+- 소원검원 (素元劍院)<br>
+- 성격/특징: 무위자연(無爲自然)을 추구하며 5대 문파 중 가장 평화롭고 온화한 문파.<br>
+- 본산: 만년설과 맑은 영천이 만나는 평온한 지역.<br>
+- 주력: 소원수심검 (상대의 힘을 흘려내는 유연한 검법).<br></div>
+            </div>
+
+            <div class="custom-box reveal-on-scroll">
+                <div class="custom-box-title">알아두면 이해하기 쉬운 내용</div>
+                <div># 핵심 개념<br>
+* 기연(奇緣): 우연히 얻는 보물, 비전, 스승과의 만남 등 운명적인 행운.<br>
+* 심마(心魔): 수행 과정에서 찾아오는 내면의 번뇌와 유혹. 극복하지 못하면 주화입마에 빠짐.<br>
+* 천겁(天劫): 경지를 돌파할 때 하늘이 내리는 번개(벼락) 시련.<br>
+<br>
+# 시간표현<br>
+- 자시 23-01<br>
+- 축시 01-03<br>
+- 인시 03-05<br>
+- 묘시 05-07<br>
+- 진시 07-09<br>
+- 사시 09-11<br>
+- 오시 11-13<br>
+- 미시 13-15<br>
+- 신시 15-17<br>
+- 유시 17-19<br>
+- 술시 19-21<br>
+- 해시 21-23<br>
+- 일다경: 15분<br>
+- 한식경: 30분<br>
+- 한시진: 2시간<br>
+- 반나절: 3시간<br>
+- 한나절: 6시간<br>
+<br>
+# 단위표현<br>
+-치(寸): 약3.03cm<br>
+-자(尺): 약30.30cm / 치의 열 배<br>
+-장(丈): 약3m<br>
+-리(里): 약400m<br>
+-푼(分): 약0.375g<br>
+-돈(錢): 약3.75g / 푼의 열 배<br>
+-냥(兩): 약37.5g / 돈의 열 배<br>
+-근(斤): 약600g<br>
+-관(貫): 약3.75kg / 6.25근, 100냥, 1000돈 해당
+</div>
+            </div>
+
+            <div class="custom-box reveal-on-scroll">
+                <div class="custom-box-title">캐릭터 설정 도우미</div>
+                <div>
+# 수련 분야<br>
+검수(劍修): 공격력 특화, 오직 검에만 뜻을 둠.<br>
+단사(丹師): 단약(영약) 제조 전문, 파티의 서포터이자 재력가.<br>
+진법가(陣法師): 결계와 진법 설치 및 해제 전문.<br>
+부적사(符師): 영부(부적)를 활용해 전투나 보조를 함.<br>
+<br>
+# 수련 경지 체계<br>
+* 응기기(凝氣期)/연기기(煉氣期): 체내에 기를 모으기 시작하는 입문 단계.<br>
+* 축기기(築基期): 단전을 형성하고 본격적인 수사의 길에 들어서는 단계. (수명 증가)<br>
+* 금단기(金丹期): 단전을 응축해 '내단(금단)'을 형성하는 단계. 고수 칭호를 얻음.<br>
+* 원영기(元嬰期): 금단에서 영혼의 분신인 '원영'이 탄생하는 단계. 육신이 파괴되어도 생존 가능.<br>
+* 화신기(化神期): 세상의 이치와 자연을 이해하고 신격에 다가가는 경지.<br></div>
+            </div>
+
+            <div class="faction-header reveal-on-scroll">✨️인물 소개</div>
+
+            <div class="reveal-on-scroll" style="margin-bottom: 20px;"><img src="https://longlong0000.github.io/BS/%EB%8B%A8%EB%AA%A9%ED%9C%98%20%EC%A0%95%EB%B3%B4.png" alt="인물 1" style="width: 100%; height: auto; display: block;"></div>
+            <div class="reveal-on-scroll" style="margin-bottom: 20px;"><img src="https://longlong0000.github.io/BS/%EB%B0%B1%EC%84%9C%EC%A7%84%20%EC%A0%95%EB%B3%B4.png" alt="인물 2" style="width: 100%; height: auto; display: block;"></div>
+            <div class="reveal-on-scroll" style="margin-bottom: 20px;"><img src="https://longlong0000.github.io/BS/%EC%9C%84%EC%A7%80%ED%98%84%20%EC%A0%95%EB%B3%B4.png" alt="인물 3" style="width: 100%; height: auto; display: block;"></div>
+            <div class="reveal-on-scroll" style="margin-bottom: 20px;"><img src="https://longlong0000.github.io/BS/%EC%A7%84%EC%B2%AD%EC%9A%B0%20%EC%A0%95%EB%B3%B4.png" alt="인물 4" style="width: 100%; height: auto; display: block;"></div>
+            <div class="reveal-on-scroll" style="margin-bottom: 20px;"><img src="https://longlong0000.github.io/BS/%EB%8F%84%EC%84%A4%EC%9A%B4%20%EC%A0%95%EB%B3%B4.png" alt="인물 5" style="width: 100%; height: auto; display: block;"></div>
+            <div class="reveal-on-scroll" style="margin-bottom: 20px;"><img src="https://longlong0000.github.io/BS/%EC%95%BC%ED%95%98%EC%96%802.png" alt="인물 6" style="width: 100%; height: auto; display: block;"></div>
+
+            <div class="custom-box reveal-on-scroll">
+                <div class="custom-box-title">그 외 / 링크 안내</div>
+                
+                <div class="custom-profile">
+                    <div class="custom-label"><a href="https://app.notion.com/p/3ce4e81e45468091b3f5f5d9cb24af7c?source=copy_link" target="_blank" class="custom-btn-link">네임카드</a></div>
+                    <div class="custom-value">유저용 네임카드 출력 방법 안내 링크</div>
+                </div>
+                
+                <div class="custom-profile" style="border-bottom: none !important;">
+                    <div class="custom-label"><a href="https://app.notion.com/p/3ce4e81e45468038b32fc776e390894f?source=copy_link" target="_blank" class="custom-btn-link">유저노트</a></div>
+                    <div class="custom-value">유저노트에 추가하면 좋은 지침들</div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; border-top: 1px solid #d9cca6; padding-top: 30px; margin-top: 50px;" class="reveal-on-scroll">
+                <span style="font-family: 'Nanum Myeongjo', serif; font-weight: normal; font-size: 15px; color: #704214; letter-spacing: 1px;">부생약몽：덧없는 세상은 한바탕 꿈과 같다</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -50px 0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
